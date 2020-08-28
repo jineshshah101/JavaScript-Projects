@@ -1,0 +1,130 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+    font-family: Gotham Rounded, sans-serif;
+  }
+
+/* body indicates the entire webpage should be affected with properties*/
+/* box sizing property allows for padding*/
+/* border box allows setting the size of a website to be a box. If padding and border spaces are required
+   it will update the space accordingly making sure it fits in that space*/
+
+
+body{
+    background: linear-gradient(to right, hsl(200, 100%, 50%), hsl(175, 100%, 50%));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+/* . allows you to call a div class from html file*/
+/* if the width and height has the same size it means it will be a square*/
+/* the background color is white but if there is 80% transparency*/
+/* border radius will change the size of the border. In this case we want to make the border into a circle
+   hence a clock*/
+/* make sure the shape of the clock is more visible using the border property*/
+
+.clock{
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 50%;
+    border: 2px solid black;
+    position: relative;
+}
+
+/* Want to affect the clock and number (all numbers included) div classes*/
+/* Want to create a position to organize the clock and the numbers themselves*/
+/* Relative position will make the clock relative to the normal position it was before*/
+/* Absolute position is used with relative so that the position relative is near the ancestor position aka
+   absolute position */
+/* Once the position for the number has been created we use width and height to increase the range of
+   the numbers so that it can go around the clock*/
+/* for the clock numbers for it to be in the clock we need to use text align and bring it to the center
+   and it will be already in the clokc thanks to the position property */
+
+   .clock .number {
+    --rotation: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform: rotate(var(--rotation));
+    font-size: 1.5rem;
+  }
+
+/* Now its time to bring the numbers into the clock seperately. Thanks to the .number css class from above
+   the numbers of the position/height/etc all of those properties will be inherited*/
+/* the transform rotate property will allow the number to move to a specific spot. In this case 30 degrees.*/
+/* the transform will change the number and increase the rotation by every 30 degrees so eventually it will
+   fit all around the clock*/
+
+   .clock .number1 { --rotation: 30deg; }
+   .clock .number2 { --rotation: 60deg; }
+   .clock .number3 { --rotation: 90deg; }
+   .clock .number4 { --rotation: 120deg; }
+   .clock .number5 { --rotation: 150deg; }
+   .clock .number6 { --rotation: 180deg; }
+   .clock .number7 { --rotation: 210deg; }
+   .clock .number8 { --rotation: 240deg; }
+   .clock .number9 { --rotation: 270deg; }
+   .clock .number10 { --rotation: 300deg; }
+   .clock .number11 { --rotation: 330deg; }
+   
+
+/* Designing the clock hand itself
+   Making sure it set to the middle and aligned with the clock number.
+   Using the rotation variable to make sure it correctly align via degree
+*/
+
+.clock .hand {
+    --rotation: 0;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    border: 1px solid black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transform-origin: bottom;
+    z-index: 10;
+    transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+  }
+  
+  /* Adding in the black circle in the middle of the clock*/
+
+  .clock::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    z-index: 11;
+    width: 15px;
+    height: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  
+  /* The second hand design*/
+
+  .clock .hand.second {
+    width: 3px;
+    height: 45%;
+    background-color: red;
+  }
+  
+  /* The minute hand design*/
+
+  .clock .hand.minute {
+    width: 7px;
+    height: 40%;
+    background-color: black;
+  }
+  
+  /* The hour hand design*/
+
+  .clock .hand.hour {
+    width: 10px;
+    height: 35%;
+    background-color: black;
+  }
